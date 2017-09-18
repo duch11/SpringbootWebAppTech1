@@ -35,6 +35,11 @@ public class HomeController {
         logger.info("login method called with: " + user);
         user = userService.getUser(user.getUsername(), user.getPassword());
         if(user != null){
+            for (String role : user.getRoles()) {
+                if (role == "admin"){
+                    model.addAttribute("admin", true);
+                }
+            }
             return "home";
         }
         model.addAttribute("error", true);
