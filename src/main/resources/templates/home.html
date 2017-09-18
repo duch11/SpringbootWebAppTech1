@@ -10,12 +10,32 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-    <h2>You're are logged in correctly!</h2>
+    <h2 th:if="${login}">You're are logged in correctly!</h2>
 
-</div>
-<div th:if="${admin}">
-    <p>test</p>
+    <h3>BLOG POSTS: hej fra home.html</h3>
+    <!-- th:if="${messagesNotEmpty}"-->
+    <table class="table">
+        <tr th:each="message : ${messages}">
+            <h2 th:text="${message.title}">TITLE</h2>
+            <p th:text="${message.text}">MESSAGE</p>
+        </tr>
+    </table>
 
+
+    <div th:if="${admin}">
+        <p>Input blog message:</p>
+        <div class="form-group">
+            <form th:action="@{/home}" th:object="${message}" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" th:field="*{title}"/>
+
+                <label for="breadtext">Text:</label>
+                <textarea class="form-control" id="breadtext" th:field="*{text}">Input message.</textarea>
+                <button class="btn btn-default" type="submit">Submit</button>
+            </form>
+        </div>
+
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
