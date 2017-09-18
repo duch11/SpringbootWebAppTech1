@@ -36,7 +36,7 @@ public class HomeController {
         user = userService.getUser(user.getUsername(), user.getPassword());
         if(user != null){
             for (String role : user.getRoles()) {
-                if (role == "admin"){
+                if (role.equals("admin")){
                     model.addAttribute("admin", true);
                 }
             }
